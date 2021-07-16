@@ -97,10 +97,6 @@ if (sgp.begin()){
  }
  }
 
-
-
-
-
 // MGSV2 ---------------------------------------
 bool initializeMGSV2Mints(){
   gas.begin(Wire, 0x08);
@@ -141,26 +137,6 @@ void readSEN0321Mints(){
     sensorPrintMints("SEN0321",readings,1);
 }
 
-// // SEN0321 ---------------------------------------
-// bool initializeSEN0321Mints(){
-//   if (Ozone.begin(Ozone_IICAddress)) {
-//     Serial.println("SEN0321 Initiated");
-//      delay(1000);
-//     return true;
-//   }else{
-//     Serial.println("SEN0321 not found");
-//     delay(1);
-//     return false;
-//   }
-
-// }
-
-// void readSEN0321Mints(){
-//     String readings[1] = { String(Ozone.ReadOzoneData(COLLECT_NUMBER))
-//                            };
-//     sensorPrintMints("SEN0321",readings,1);
-// }
-
 // PMSA0031 ---------------------------------------
 bool initializePMSA003IMints(){
   if (aqi.begin_I2C()) {
@@ -196,3 +172,42 @@ void readPMSA003IMints(){
     sensorPrintMints("PMSA003I",readings,12);
   }
 }
+
+
+// 
+bool initializeMQ136Mints(){
+   Serial.println("Initiating MQ136");
+   delay(20000);
+   Serial.println("MQ136 Initiated");
+   return true;
+}
+
+
+void readMQ136Mints(){
+       String readings[1] =
+                      { String(analogRead(0)), 
+                      };
+
+    sensorPrintMints("PMQ136",readings,1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

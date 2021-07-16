@@ -20,6 +20,10 @@ bool SEN0321Online;
 Adafruit_PM25AQI aqi = Adafruit_PM25AQI();
 bool PMSA003IOnline; 
 
+bool MQ136Online; 
+
+
+
 uint16_t sensingPeriod = 1000;
 uint16_t initPeriod = 1500;
 
@@ -48,6 +52,8 @@ void setup() {
   delay(initPeriod);
   PMSA003IOnline = initializePMSA003IMints();
 
+  delay(initPeriod);
+  MQ136Online = initializeMQ136Mints();
 }
 
 // the loop routine runs over and over again forever:
@@ -99,6 +105,13 @@ void loop() {
     {
       readPMSA003IMints();
     }
+
+    delay(sensingPeriod);
+    if(MQ136Online)
+    {
+      readMQ136Mints();
+    }
+
 
     delayMints(millis() - startTime,10000);
 

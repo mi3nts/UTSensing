@@ -59,4 +59,7 @@ extern Adafruit_PM25AQI aqi;
 bool initializePMSA003IMints();
 void readPMSA003IMints();
 
+bool initializeMQ136Mints();
+void readMQ136Mints();
+
 #endif
