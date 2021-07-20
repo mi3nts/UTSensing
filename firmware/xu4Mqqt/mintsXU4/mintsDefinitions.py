@@ -67,10 +67,10 @@ def findMacAddress():
 
 
 
-dataFolderReference       = "/home/teamlary/mintsData/reference"
-dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"
-dataFolder                = "/home/teamlary/mintsData/raw"
-dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
+dataFolderReference       = "~/utData/reference"
+dataFolderMQTTReference   = "~/utData/referenceMQTT"
+dataFolder                = "~/utData/raw"
+dataFolderMQTT            = "~/utData/rawMQTT"
 
 duePort               = findDuePort()
 nanoPorts             = findNanoPorts()
@@ -99,8 +99,6 @@ if __name__ == "__main__":
     print("Due Port             : {0}".format(duePort))
     print("Ozone Port           : {0}".format(ozonePort))
     print("GPS Port             : {0}".format(gpsPort))
-    print("Show2 Port           : {0}".format(show2Port))
-    print("Latest On            : {0}".format(latestDisplayOn))
     print("Latest On                  : {0}".format(latestOn))
     print("MQTT On                    : {0}".format(mqttOn))
     print("MQTT Credentials File      : {0}".format(mqttCredentialsFile))
