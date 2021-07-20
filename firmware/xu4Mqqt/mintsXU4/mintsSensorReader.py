@@ -7,6 +7,11 @@
 #   ---------------------------------
 #   Date: February 4th, 2019
 #   ---------------------------------
+#   Updated for UTSensing at the request of Abelson, Eric S
+#    
+#   Updated on : June 19th, 2021
+#   ---------------------------------
+
 #   This module is written for generic implimentation of MINTS projects
 #   --------------------------------------------------------------------------
 #   https://github.com/mi3nts
@@ -142,9 +147,115 @@ def sensorSend(sensorID,sensorData,dateTime):
         HM3301Write(sensorData, dateTime)
     if(sensorID=="SI114X"):
         SI114XWrite(sensorData, dateTime)
+# June 19, 2021 Updates 
+    if(sensorID=="BME680"):
+        BME680Write(sensorData,dateTime)
+    if(sensorID=="SGP30"):
+        SGP30Write(sensorData, dateTime)
+    if(sensorID=="MGSV2"):
+        MGSV2Write(sensorData, dateTime)
+    if(sensorID=="SEN0321"):
+        SEN0321Write(sensorData, dateTime)
+    if(sensorID=="PMSA003I"):
+        PMSA003IWrite(sensorData, dateTime)
+    if(sensorID=="MQ136"):
+        MQ136Write(sensorData, dateTime)
+
+def BME680Write(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "BME680"
+    dataLength = 4
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     , str(dateTime)), # always the same
+        		("temperature"  ,dataOut[0]), # check with arduino code
+            	("pressure"     ,dataOut[1]),
+                ("humidity"     ,dataOut[2]),
+            	("gas"          ,dataOut[3])
+                ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+def SGP30Write(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "SGP30"
+    dataLength = 4
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     , str(dateTime)), # always the same
+        		("TVOC"         ,dataOut[0]), # check with arduino code
+            	("eCO2"         ,dataOut[1]),
+                ("rawEthanol"   ,dataOut[2]),
+            	("rawEthanol"   ,dataOut[3])
+                ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 
 
+def MGSV2Write(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "MGSV2"
+    dataLength = 4
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime" , str(dateTime)), # always the same
+        		("NO2"      ,dataOut[0]), # check with arduino code
+            	("C2H5OH"   ,dataOut[1]),
+                ("VOC"      ,dataOut[2]),
+            	("CO"       ,dataOut[3])
+                ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+
+def SEN0321Write(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "SEN0321"
+    dataLength = 1
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime" , str(dateTime)), # always the same
+        		("Ozone"      ,dataOut[0]) # check with arduino code
+                  ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+
+def PMSA003IWrite(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "PMSA003I"
+    dataLength = 12
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime" , str(dateTime)), # always the same
+        		("pm1Standard"  ,dataOut[0]), # check with arduino code
+            	("pm2p5Standard",dataOut[1]),
+                ("pm10_standard",dataOut[2]),
+        		("pm1Env"       ,dataOut[3]), # check with arduino code
+            	("pm2p5Env"     ,dataOut[4]),
+                ("pm10Env"      ,dataOut[5]),
+                ("binCount0p3um",dataOut[6]), # check with arduino code
+                ("binCount0p5um",dataOut[7]), # check with arduino code
+                ("binCount1um"  ,dataOut[8]), # check with arduino code
+                ("binCount2p5um",dataOut[9]), # check with arduino code
+                ("binCount5um"  ,dataOut[10]), # check with arduino code
+                ("binCount10um" ,dataOut[11]) # check with arduino code
+            	              ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+def MQ136Write(sensorData,dateTime):
+    dataOut    = sensorData.split(':')
+    sensorName = "MQ136"
+    dataLength = 1
+    if(len(dataOut) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime" , str(dateTime)), # always the same
+        		("rawH2s"   ,dataOut[0]) # check with arduino code
+                  ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+
+
+
+
+# End June 19, 2021 Updates 
 
 def BME280Write(sensorData,dateTime):
     dataOut    = sensorData.split(':')
@@ -187,7 +298,7 @@ def SCD30Write(sensorData,dateTime):
     if(len(dataOut) == (dataLength +1)):
         sensorDictionary =  OrderedDict([
                 ("dateTime"     , str(dateTime)),
-        		("c02"          ,dataOut[0]),
+        		("co2"          ,dataOut[0]),
             	("temperature"  ,dataOut[1]),
                 ("humidity"     ,dataOut[2]),
 

@@ -188,7 +188,7 @@ void readMQ136Mints(){
                       { String(analogRead(0)), 
                       };
 
-    sensorPrintMints("PMQ136",readings,1);
+    sensorPrintMints("MQ136",readings,1);
 }
 
 
