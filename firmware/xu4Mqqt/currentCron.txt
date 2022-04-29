@@ -1,0 +1,5 @@
+@reboot cd /home/utsensing/gitHubRepos/UTSensing/firmware/xu4Mqqt && ./runAll.sh
+*/10 * * * * cd /home/utsensing/gitHubRepos/UTSensing/firmware/xu4Mqqt && ./runAll.sh
+*/1 * * * * rsync -avzrtu -e "ssh -p 2222" /home/utsensing/utData/raw/ mints@mintsdata.utdallas.edu:/home/mints/raw/
+
+
